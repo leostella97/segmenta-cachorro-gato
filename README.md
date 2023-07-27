@@ -17,3 +17,9 @@ Importação das Bibliotecas: O código inicia importando as bibliotecas necess�
 <code>Criação da Janela e Elementos</code>: O código cria a janela principal (janela) usando a classe Tk(). Em seguida, cria os elementos da interface, incluindo um texto explicativo, um rótulo para exibir a imagem carregada e dois botões - "Carregar Imagem" e "Segmentar".
 <br>
 <code>Exibição da Janela</code>: A interface gráfica é exibida chamando o método mainloop() da janela principal. A partir deste ponto, a interface estará funcionando e pronta para interação do usuário.
+
+## Como Utilizar
+Execute o código Python em um ambiente que suporta <b>Tkinter</b>.
+Clique no botão <b>"Carregar Imagem"</b> para selecionar uma imagem do seu computador.
+A imagem selecionada será <i>exibida na interface</i>.
+Clique no botão <b>"Segmentar"</b> para iniciar a segmentação da imagem <i>(essa parte ainda precisa ser implementada).</i>
