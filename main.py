@@ -21,12 +21,31 @@ def segmentar_imagem():
         return
 
     imagem = cv2.imread(imagem_carregada)
-    # Implemente aqui a lógica de processamento de imagem para segmentar a imagem
-    # Você pode utilizar técnicas de detecção de objetos, classificação ou qualquer outro método adequado para identificar se é um cachorro ou gato
-    # Como exemplo, você pode utilizar um modelo previamente treinado para classificar a imagem
+
+    # Use o modelo de detecção de objetos YOLO V3 para detectar objetos na imagem
+    detector = cv2.dnn.readNetFromDarknet("yolov3.cfg", "yolov3.weights")
+    classes = ["person", "dog", "cat"]
+    colors = [(0, 255, 0), (0, 0, 255), (255, 0, 0)]
+
+    # Detecte objetos na imagem
+    detections = detector.detect(imagem, 0.5, 0.4)
+
+    # Desenhe os retângulos ao redor dos objetos detectados
+    for detection in detections:
+        x, y, w, h = detection[2:6]
+        confidence = detection[6]
+        label = classes[detection[5]].upper()
+        color = colors[detection[5]]
+
+        cv2.rectangle(imagem, (x, y), (x + w, y + h), color, 2)
+        cv2.putText(imagem, label, (x, y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+
+    # Exiba a imagem segmentada na janela
+    img_label.imagem = ImageTk.PhotoImage(imagem)
+    img_label.config(image=img_label.imagem)
 
     # Exemplo de como exibir o resultado na janela:
-    resultado = "Cachorro"  # Supondo que o resultado foi "Cachorro", você pode substituir isso com o resultado real
+    resultado = "Cachorro" if "dog" in label else "Gato"
     resultado_label.config(text=f"Resultado da Segmentação: {resultado}")
 
 # Crie a janela principal
